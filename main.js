@@ -25,16 +25,24 @@ const insertZ = ['spontaneously combusted', 'melted into a puddle on the sidewal
 // adds click event listener to randomize variable so result() runs once clicked
 randomize.addEventListener('click', result);
 
-// variable to create a new random story each time the button is pressed
-const newStory = storyText;
+function result(){
+    // variable to create a new random story each time the button is pressed
+    const newStory = storyText;
 
-// new variables that will pick a random value from our arrays
-const xItem = randomValueFromArray(insertX)
-const yItem = randomValueFromArray(insertY)
-const zItem = randomValueFromArray(insertZ)
+    // new variables that will pick a random value from our arrays
+    const xItem = randomValueFromArray(insertX);
+    const yItem = randomValueFromArray(insertY);
+    const zItem = randomValueFromArray(insertZ);
 
-// replacing string from storyText (newStory) and replaced by random string from the arrays
-newStory = newStory.replace(':insertx:', xItem)
-newStory = newStory.replace(':inserty:', yItem)
-newStory = newStory.replace(':insertz:', zItem)
+    // replacing string from storyText (newStory) and replaced by random string from the arrays
+    newStory = newStory.replace(':insertx:', xItem);
+    newStory = newStory.replace(':inserty:', yItem);
+    newStory = newStory.replace(':insertz:', zItem);
 
+    // if statment to change bob into user input, otherwise nothing happens
+    if (customName.value !== ''){
+        const name = customName.value;
+        newStory = newStory.replace('Bob', name);
+    }
+
+    };
