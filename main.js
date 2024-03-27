@@ -54,5 +54,6 @@ function result(){
     }
 
     // making the textContext property of the story and equal to newStory
-    story.textContext = newStory;
-    }
+    story.textContent = newStory;
+    story.style.visibility = 'visible';
+}
