@@ -26,8 +26,8 @@ const insertZ = ['spontaneously combusted', 'melted into a puddle on the sidewal
 randomize.addEventListener('click', result);
 
 function result(){
-    // variable to create a new random story each time the button is pressed
-    const newStory = storyText;
+    // variable to create a new random story each time the button is pressed (use let so the value can be modified)
+    let newStory = storyText;
 
     // new variables that will pick a random value from our arrays
     const xItem = randomValueFromArray(insertX);
