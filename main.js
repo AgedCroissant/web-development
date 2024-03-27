@@ -35,9 +35,9 @@ function result(){
     const zItem = randomValueFromArray(insertZ);
 
     // replacing string from storyText (newStory) and replaced by random string from the arrays
-    newStory = newStory.replace(':insertx:', xItem);
-    newStory = newStory.replace(':inserty:', yItem);
-    newStory = newStory.replace(':insertz:', zItem);
+    newStory = newStory.replaceAll(':insertx:', xItem);
+    newStory = newStory.replaceAll(':inserty:', yItem);
+    newStory = newStory.replaceAll(':insertz:', zItem);
 
     // if statment to change bob into user input, otherwise nothing happens
     if (customName.value !== ''){
@@ -49,8 +49,8 @@ function result(){
     if (document.getElementById("uk").checked){
         const weight = `${Math.round(300 * 0.0714286)} stone`;
         const temperature = `${Math.round((94 - 32) * 5 / 9)} centigrade`;
-        newStory = newStory.replace('300 pounds', weight)
-        newStory = newStory.replace('94 fahrenheit', temperature)  
+        newStory = newStory.replaceAll('300 pounds', weight)
+        newStory = newStory.replaceAll('94 fahrenheit', temperature)  
     }
 
     // making the textContext property of the story and equal to newStory
