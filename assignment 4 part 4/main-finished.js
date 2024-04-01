@@ -28,74 +28,7 @@ class Shape {
   }
 }
 
-// evilcricle
-class EvilCircle extends Shape{
-  constructor(x, y){
-    super(x, y, 20, 20);
-    this.colour = 'white';
-    this.size = 10;
 
-    window.addEventListener("keydown", (e) => {
-      switch (e.key) {
-        case "a":
-          this.x -= this.velX;
-          break;
-        case "d":
-          this.x += this.velX;
-          break;
-        case "w":
-          this.y -= this.velY;
-          break;
-        case "s":
-          this.y += this.velY;
-          break;
-      }
-    });
-  }
-// draw for evil circle to be on canvas
-    draw() {
-      ctx.beginPath();
-      ctx.strokeStyle = this.color;
-      ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-      ctx.stroke();
-      ctx.lineWidth = 3;
-  } 
-
-  collisionDetect() {
-    for (const ball of balls) {
-       if (ball.exists) {
-          const dx = this.x - ball.x;
-          const dy = this.y - ball.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < this.size + ball.size) {
-            // eliminating the ball once it collides with evilcircle
-            ball.exist = false;
-          }
-       }
-    }
-  }
-
-  // making sure evilcircle stays in bounds
-  checkBounds() {
-    if ((this.x + this.size) >= width) {
-      this.x -= (this.size);
-    }
-  
-    if ((this.x - this.size) <= 0) {
-      this.x += (this.size);
-    }
-  
-    if ((this.y + this.size) >= height) {
-      this.y -= (this.size);
-    }
-  
-    if ((this.y - this.size) <= 0) {
-      this.y += (this.size);
-    }
-} 
-
-}
 
 // class deifinition for our balls 
 
@@ -152,7 +85,77 @@ class Ball extends Shape{
       }
     }
     
+}
+
+  // evilcricle
+class EvilCircle extends Shape{
+  constructor(x, y){
+    super(x, y, 20, 20);
+    this.color = 'white';
+    this.size = 10;
+
+    window.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "a":
+          this.x -= this.velX;
+          break;
+        case "d":
+          this.x += this.velX;
+          break;
+        case "w":
+          this.y -= this.velY;
+          break;
+        case "s":
+          this.y += this.velY;
+          break;
+      }
+    });
   }
+// draw for evil circle to be on canvas
+    draw() {
+      ctx.beginPath();
+      ctx.strokeStyle = this.color;
+      ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+      ctx.stroke();
+      ctx.lineWidth = 3;
+  } 
+
+
+  // making sure evilcircle stays in bounds
+  checkBounds() {
+    if ((this.x + this.size) >= width) {
+      this.x -= this.size;
+    }
+  
+    if ((this.x - this.size) <= 0) {
+      this.x += this.size;
+    }
+  
+    if ((this.y + this.size) >= height) {
+      this.y -= this.size;
+    }
+  
+    if ((this.y - this.size) <= 0) {
+      this.y += this.size;
+    }
+  } 
+
+  collisionDetect() {
+    for (const ball of balls) {
+      if (ball.exists) {
+          const dx = this.x - ball.x;
+          const dy = this.y - ball.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < this.size + ball.size) {
+            // eliminating the ball once it collides with evilcircle
+            ball.exists = false;
+          }
+      }
+    }
+  }
+
+}
 
 // code to add balls to the canvas
 const balls = [];
@@ -183,16 +186,16 @@ function loop() {
   ctx.fillRect(0, 0, width, height);
 
   for (const ball of balls) {
-    if (ball.exist){
+    if (ball.exists){
       ball.draw();
       ball.update();
       ball.collisionDetect();
     }
   }
-  evilCircle.draw();
-  evilCircle.checkBounds();
-  evilCircle.collisionDetect();
-  requestAnimationFrame(loop);
+    evilCircle.draw();
+    evilCircle.checkBounds();
+    evilCircle.collisionDetect();
+    requestAnimationFrame(loop);
 }
 
 // calling the functon to get the animation started
