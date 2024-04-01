@@ -58,7 +58,22 @@ class Ball {
       
         this.x += this.velX;
         this.y += this.velY;
-    }    
+    } 
+
+    // adding collision to the balls
+    collisionDetect() {
+        for (const ball of balls) {
+          if (this !== ball) {
+            const dx = this.x - ball.x;
+            const dy = this.y - ball.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+      
+            if (distance < this.size + ball.size) {
+              ball.color = this.color = randomRGB();
+            }
+          }
+        }
+      }
   }
 
 // code to add balls to the canvas
@@ -81,17 +96,20 @@ while (balls.length < 25) {
   }
   
 // loop that gives colour to the background, and updates constantly to give colour to the balls as they move
+// also makes the ball colour change if it collides with another ball
 function loop() {
-    ctx.fillStyle = "rgb(0 0 0 / 25%)";
-    ctx.fillRect(0, 0, width, height);
-  
-    for (const ball of balls) {
-      ball.draw();
-      ball.update();
-    }
-  
-    requestAnimationFrame(loop);
+  ctx.fillStyle = "rgb(0 0 0 / 25%)";
+  ctx.fillRect(0, 0, width, height);
+
+  for (const ball of balls) {
+    ball.draw();
+    ball.update();
+    ball.collisionDetect();
+  }
+
+  requestAnimationFrame(loop);
 }
+
 
 // calling the functon to get the animation started
 loop();
