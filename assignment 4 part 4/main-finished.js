@@ -27,14 +27,21 @@ class Shape {
     this.velY = velY;
   }
 }
+
+// evilcricle
+class EvilCircle extends Shape{
+  constructor(x, y){
+    super(x, y, 20, 20);
+    this.colour = 'white';
+    this.size = 10;
+  }
+}
+
 // class deifinition for our balls 
 
 class Ball extends Shape{
     constructor(x, y, velX, velY, color, size) {
-      this.x = x;
-      this.y = y;
-      this.velX = velX;
-      this.velY = velY;
+      super(x, y, velX, velY);
       this.color = color;
       this.size = size;
       this.exists = true;
