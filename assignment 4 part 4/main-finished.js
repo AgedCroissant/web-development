@@ -35,6 +35,14 @@ class EvilCircle extends Shape{
     this.colour = 'white';
     this.size = 10;
 
+    // drawing the evilcircle on the canvas
+    draw(){
+      ctx.beginPath();
+      ctx.strokeStyle = this.color;
+      ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+      ctx.stroke();
+    } 
+
     window.addEventListener("keydown", (e) => {
       switch (e.key) {
         case "a":
