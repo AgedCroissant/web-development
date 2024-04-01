@@ -35,14 +35,6 @@ class EvilCircle extends Shape{
     this.colour = 'white';
     this.size = 10;
 
-    // drawing the evilcircle on the canvas
-    draw(){
-      ctx.beginPath();
-      ctx.strokeStyle = this.color;
-      ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-      ctx.stroke();
-    } 
-
     window.addEventListener("keydown", (e) => {
       switch (e.key) {
         case "a":
@@ -60,6 +52,29 @@ class EvilCircle extends Shape{
       }
     });
   }
+// draw for evil circle to be on canvas
+    draw() {
+      ctx.beginPath();
+      ctx.strokeStyle = this.color;
+      ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+      ctx.stroke();
+      ctx.lineWidth = 3;
+  } 
+
+  collisionDetect() {
+    for (const ball of balls) {
+       if (!(this === ball) && ball.exists) {
+          const dx = this.x - ball.x;
+          const dy = this.y - ball.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < this.size + ball.size) {
+            ball.color = this.color = randomRGB();
+          }
+       }
+    }
+ }
+
 }
 
 // class deifinition for our balls 
