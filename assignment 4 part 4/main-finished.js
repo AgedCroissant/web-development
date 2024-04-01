@@ -180,14 +180,16 @@ function loop() {
   ctx.fillRect(0, 0, width, height);
 
   for (const ball of balls) {
-    ball.draw();
-    ball.update();
-    ball.collisionDetect();
+    if (ball.exist = true)
+      ball.draw();
+      ball.update();
+      ball.collisionDetect();
   }
-
+  evilBall.draw();
+  evilBall.checkBounds();
+  evilBall.collisionDetect();
   requestAnimationFrame(loop);
 }
-
 
 // calling the functon to get the animation started
 loop();
