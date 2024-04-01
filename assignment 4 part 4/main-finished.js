@@ -180,10 +180,11 @@ function loop() {
   ctx.fillRect(0, 0, width, height);
 
   for (const ball of balls) {
-    if (ball.exist = true)
+    if (ball.exist){
       ball.draw();
       ball.update();
       ball.collisionDetect();
+    }
   }
   evilBall.draw();
   evilBall.checkBounds();
