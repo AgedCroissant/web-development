@@ -18,9 +18,18 @@ function randomRGB() {
   return `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`;
 }
 
+// 
+class Shape {
+  constructor(x, y, velX, velY){
+    this.x = x;
+    this.y = y;
+    this.velX = velX;
+    this.velY = velY;
+  }
+}
 // class deifinition for our balls 
 
-class Ball {
+class Ball extends Shape{
     constructor(x, y, velX, velY, color, size) {
       this.x = x;
       this.y = y;
@@ -28,6 +37,7 @@ class Ball {
       this.velY = velY;
       this.color = color;
       this.size = size;
+      this.exists = true;
     }
 
     // giving the balls instructions on how to act
@@ -60,20 +70,21 @@ class Ball {
         this.y += this.velY;
     } 
 
-    // adding collision to the balls
+    // collision between the balls
     collisionDetect() {
-        for (const ball of balls) {
-          if (this !== ball) {
-            const dx = this.x - ball.x;
-            const dy = this.y - ball.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-      
-            if (distance < this.size + ball.size) {
-              ball.color = this.color = randomRGB();
-            }
+      for (const ball of balls) {
+        if (!(this === ball) && ball.exists) {
+          const dx = this.x - ball.x;
+          const dy = this.y - ball.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+    
+          if (distance < this.size + ball.size) {
+            ball.color = this.color = randomRGB();
           }
         }
       }
+    }
+    
   }
 
 // code to add balls to the canvas
