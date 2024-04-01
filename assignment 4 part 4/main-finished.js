@@ -172,6 +172,9 @@ while (balls.length < 25) {
   
     balls.push(ball);
   }
+
+// create an evilxircle object
+const evilCircle = new EvilCircle(random(0, width), random(0, height));
   
 // loop that gives colour to the background, and updates constantly to give colour to the balls as they move
 // also makes the ball colour change if it collides with another ball
@@ -186,9 +189,9 @@ function loop() {
       ball.collisionDetect();
     }
   }
-  evilBall.draw();
-  evilBall.checkBounds();
-  evilBall.collisionDetect();
+  evilCircle.draw();
+  evilCircle.checkBounds();
+  evilCircle.collisionDetect();
   requestAnimationFrame(loop);
 }
 
