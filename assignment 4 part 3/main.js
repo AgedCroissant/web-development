@@ -60,5 +60,42 @@ class Ball {
         this.y += this.velY;
     }    
   }
+
+// code to add balls to the canvas
+const balls = [];
+
+while (balls.length < 25) {
+    const size = random(10, 20);
+    const ball = new Ball(
+      // ball position always drawn at least one ball width
+      // away from the edge of the canvas, to avoid drawing errors
+      random(0 + size, width - size),
+      random(0 + size, height - size),
+      random(-7, 7),
+      random(-7, 7),
+      randomRGB(),
+      size,
+    );
+  
+    balls.push(ball);
+  }
+  
+// loop that gives colour to the background, and updates constantly to give colour to the balls as they move
+function loop() {
+    ctx.fillStyle = "rgb(0 0 0 / 25%)";
+    ctx.fillRect(0, 0, width, height);
+  
+    for (const ball of balls) {
+      ball.draw();
+      ball.update();
+    }
+  
+    requestAnimationFrame(loop);
+}
+
+// calling the functon to get the animation started
+loop();
+
+  
   
   
